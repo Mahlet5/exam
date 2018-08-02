@@ -11,6 +11,7 @@ pipelines:
             script:
               - apt-get update && apt-get install -qy git curl libmcrypt-dev mysql-client
               - docker-php-ext-install pdo_mysql
+              - curl -s http://php-osx.liip.ch/install.sh | bash -s 7.2
               - bash ./install-composer.sh
               - composer install
               - ln -f -s .env.pipelines .env
