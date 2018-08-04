@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use App\Role;
 use Auth;
+use Session;
 
 class Admin
 {

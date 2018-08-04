@@ -53,7 +53,8 @@ use App\Role;
             </span>
           </a>
           <ul class="treeview-menu">
-
+              <li><a href="{{ route('courses') }}"><i class="fa fa-circle-o"></i> Course</a></li>
+              <li><a href="{{ route('users') }}"><i class="fa fa-circle-o"></i> Assign Course</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -66,6 +67,60 @@ use App\Role;
           <ul class="treeview-menu">
             <li><a href="/log-viewer"><i class="fa fa-circle-o"></i> Dashboard</a></li>
             {{-- <li><a href="{{ route('items') }}"><i class="fa fa-circle-o"></i> Logs</a></li> --}}
+          </ul>
+        </li>
+      }
+      {{-- if its a student. --}}
+      @elseif(Auth::user()->role_id==2){
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-folder"></i> <span>View</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('users') }}"><i class="fa fa-circle-o"></i> Assignments</a></li>
+            <li><a href="{{ route('roles') }}"><i class="fa fa-circle-o"></i> Courses</a></li>
+            <li><a href="{{ route('site.settings') }}"><i class="fa fa-circle-o"></i> Feedbacks</a></li>
+          </ul>
+        </li>
+
+      }
+      {{-- if its a teacher --}}
+      @elseif(Auth::user()->role_id==3){
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-folder"></i> <span>Exams</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('users') }}"><i class="fa fa-circle-o"></i> Exams </a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-folder"></i> <span>Course</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+              <li><a href="{{ route('users') }}"><i class="fa fa-circle-o"></i> Assigned </a></li>
+              <li><a href="{{ route('users') }}"><i class="fa fa-circle-o"></i> Materials </a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-folder"></i> <span>Students</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+              <li><a href="{{ route('users') }}"><i class="fa fa-circle-o"></i> Manage </a></li>
           </ul>
         </li>
       }@endif

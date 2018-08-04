@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Setting;
+use Session;
 
 class SettingsController extends Controller
 {
@@ -14,7 +15,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        return view('admin.settings.index')->with('settings', Setting::all());
+        return view('admin.settings.settings')->with('settings', Setting::first());
     }
 
     /**
@@ -67,9 +68,34 @@ class SettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+      $this->validate($request,[
+        'site_name'=>'required',
+        'contact_number'=>'required',
+        'contact_email'=>'required|email',
+        'address'=>'required',
+        'about'=>'required',
+      ]);
+
+      $setting  = Setting::first();
+      if($request->hasFile('logo')){
+          $logo = $request->logo;
+          $logo_new = time().$logo->getClientOriginalName();
+          $logo->move('uploads/company',$logo_new);
+          $setting->logo = 'uploads/company/'.$logo_new;
+          $setting->save();
+      }
+
+      $setting->site_name = $request->site_name;
+      $setting->contact_number = $request->contact_number;
+      $setting->contact_email = $request->contact_email;
+      $setting->address = $request->address;
+      $setting->about = $request->about;
+
+      $setting->save();
+      Session::flash('success','Site settings updated successfully.');
+      return redirect()->back();
     }
 
     /**

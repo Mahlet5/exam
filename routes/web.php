@@ -24,20 +24,61 @@ Route::get('/home', 'HomeController@index')->name('home');
  * @var [type]
  */
 Route::group(['prefix'=>'admin','middleware'=>['auth','admin']],function(){
-    Route::get('/users',[
-      'uses'=>'UsersController@index',
-      'as'=>'users'
-    ]);
+      Route::get('/users',[
+        'uses'=>'UsersController@index',
+        'as'=>'users'
+      ]);
 
-    Route::get('/roles',[
-      'uses'=>'RolesController@index',
-      'as'=>'roles'
-    ]);
+      Route::get('user/delete/{id}',[
+        'uses'=>'UsersController@destroy',
+        'as'=>'user.delete'
+      ]);
 
-    Route::get('/site/settings',[
-      'uses'=>'SettingsController@index',
-      'as'=>'site.settings'
-    ]);
+      Route::get('user/create',[
+        'uses'=>'UsersController@create',
+        'as'=>'user.create'
+      ]);
+
+      Route::post('user/store',[
+        'uses'=>'UsersController@store',
+        'as'=>'user.store'
+      ]);
+
+      Route::get('/roles',[
+        'uses'=>'RolesController@index',
+        'as'=>'roles'
+      ]);
+
+      Route::post('role/store',[
+        'uses'=>'RolesController@store',
+        'as'=>'role.store'
+      ]);
+
+      Route::get('/site/settings',[
+        'uses'=>'SettingsController@index',
+        'as'=>'site.settings'
+      ]);
+
+      Route::post('/settings/update',[
+        'uses'=>'SettingsController@update',
+        'as'=>'settings.update'
+      ]);
+
+      Route::get('/courses',[
+        'uses'=>'CourseController@index',
+        'as'=>'courses'
+      ]);
+
+      Route::post('/course/store',[
+        'uses'=>'CourseController@store',
+        'as'=>'course.store'
+      ]);
+
+      Route::get('/course/delete/{id}',[
+        'uses'=>'CourseController@destroy',
+        'as'=>'course.delete'
+      ]);
+
 });
 
 /**
@@ -59,4 +100,9 @@ Route::group(['prefix'=>'teacher','middleware'=>['auth','teacher']],function(){
 Route::get('/profile',[
   'uses'=>'ProfilesController@index',
   'as'=>'profile'
+]);
+
+Route::post('/user/profile/update',[
+    'uses'=>'ProfilesController@update',
+    'as'=>'user.profile.update'
 ]);

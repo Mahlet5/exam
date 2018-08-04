@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Role;
+use App\Course;
 use Session;
 
-class RolesController extends Controller
+class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return view('admin.roles.index')->with(['roles'=>Role::all()]);
+        return view('admin.lookups.course.index')->with('courses', Course::all());
     }
 
     /**
@@ -37,17 +37,21 @@ class RolesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-          'rolename'=>'required',
-          'description'=>'required'
+            'title'=>'required',
+            'code'=>'required',
+            'description'=>'required'
         ]);
 
-        $role = new Role;
-        $role->name = $request->rolename;
-        $role->description = $request->description;
+        $course = new Course;
+        $course->cno = $request->code;
+        $course->title = $request->title;
+        $course->description = $request->description;
 
-        $role->save();
-        Session::flash('success','Successfull created new role.');
-        return redirect()->route('roles');
+        $course->save();
+        Session::flash('success','Course information saved.');
+
+        return redirect()->route('courses');
+
     }
 
     /**
@@ -92,6 +96,9 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $course = Course::find($id);
+        $course->delete();
+        Session::flash('success','Course information deleted.');
+        return redirect()->route('courses');
     }
 }
