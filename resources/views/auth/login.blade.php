@@ -30,17 +30,17 @@
     <b>Exam</b> Management
   </div>
   <!-- /.login-logo -->
-  <div class="login-box-body">
+  <div class="login-box-body" style="opacity:0.7;">
     <p class="login-box-msg">Sign in to start your session</p>
 
     <form action="{{ route('login') }}" method="post">
       {{ csrf_field() }}
-      <div class="form-group has-feedback">
+      <div class="form-group has-feedback" style="opacity:0.8;">
         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
 
-      <div class="form-group has-feedback">
+      <div class="form-group has-feedback" style="opacity:0.8;">
         <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
