@@ -17,7 +17,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/AdminLTE.min.css') }}">
   <!-- iCheck -->
-  <link rel="stylesheet" href="{{ asset('../../plugins/iCheck/square/blue.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/iCheck/square/blue.css') }}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.min.css')}}">
@@ -26,16 +26,16 @@
 
 <body class="hold-transition login-page" style="background-image:url('{{ asset('uploads/site/background.jpg') }}');background-repeat:no-repeat;background-size:cover;background-position:center center;">
 <div class="login-box">
-  <div class="login-logo" style="color:#fff;">
+  <div class="login-logo" style="color:#fff;text-shadow: 2px 2px 8px #3c8dbc;">
     <b>Exam</b> Management
   </div>
   <!-- /.login-logo -->
-  <div class="login-box-body" style="opacity:0.7;">
+  <div class="login-box-body" style="opacity:0.9;">
     <p class="login-box-msg">Sign in to start your session</p>
 
     <form action="{{ route('login') }}" method="post">
       {{ csrf_field() }}
-      <div class="form-group has-feedback" style="opacity:0.8;">
+      <div class="form-group has-feedback" style="opacity:0.9;">
         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>

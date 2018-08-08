@@ -32,7 +32,7 @@
                     <button type="button" class="btn btn-block btn-info">{{ $course->title }}</button>
                 @endforeach
                 @if(count($teacher->courses)==0)
-                    No assignd courses.
+                    No assigned courses.
                 @endif
               </td>
               <td>

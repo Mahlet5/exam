@@ -7,6 +7,7 @@ use App\User;
 use App\Role;
 use App\Profile;
 use Session;
+use Notification;
 
 class UsersController extends Controller
 {
@@ -39,7 +40,7 @@ class UsersController extends Controller
     public function store(Request $request)
     {
 
-      // $watchers = array();
+      $watchers = array();
 
       $this->validate($request,[
         'fullname'=>'required',

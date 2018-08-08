@@ -7,6 +7,7 @@ use App\CourseUser;
 use App\User;
 use App\Course;
 use Session;
+use Notification;
 
 class CourseUserController extends Controller
 {
@@ -43,6 +44,8 @@ class CourseUserController extends Controller
      */
     public function store(Request $request)
     {
+        $watchers = array();
+
         $this->validate($request, [
             'teacher'=>'required',
             'course'=>'required'
@@ -51,6 +54,10 @@ class CourseUserController extends Controller
         $user = User::find($request->teacher);
 
         $user->courses()->attach($request->course);
+
+        //send email Notification
+        array_push($watchers,$user);
+        Notification::send($watchers, new \App\Notifications\CourseAssigned());
 
         Session::flash('success','Successfully assigned courses');
         return redirect()->route('course.assignments');
