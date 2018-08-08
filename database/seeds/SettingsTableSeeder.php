@@ -16,7 +16,7 @@ class SettingsTableSeeder extends Seeder
           'contact_number'=>'(+251) 111 11 11 11',
           'contact_email'=>'4kexam@support.com',
           'address'=>'Addis Ababa, Ethiopia',
-          'logo'=>'uploads/site/logo.png',
+          'logo'=>'uploads/company/logo.png',
           'about'=>'Its about something'
         ]);
     }

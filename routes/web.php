@@ -79,6 +79,16 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin']],function(){
         'as'=>'course.delete'
       ]);
 
+      Route::get('/course/assignments',[
+        'uses'=>'CourseUserController@index',
+        'as'=>'course.assignments'
+      ]);
+
+      Route::post('/course/assign',[
+        'uses'=>'CourseUserController@store',
+        'as'=>'course.assign'
+      ]);
+
 });
 
 /**

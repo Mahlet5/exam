@@ -54,7 +54,7 @@ use App\Role;
           </a>
           <ul class="treeview-menu">
               <li><a href="{{ route('courses') }}"><i class="fa fa-circle-o"></i> Course</a></li>
-              <li><a href="{{ route('users') }}"><i class="fa fa-circle-o"></i> Assign Course</a></li>
+              <li><a href="{{ route('course.assignments') }}"><i class="fa fa-circle-o"></i> Assign Course</a></li>
           </ul>
         </li>
         <li class="treeview">
