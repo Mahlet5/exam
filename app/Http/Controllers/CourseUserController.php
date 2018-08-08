@@ -98,6 +98,9 @@ class CourseUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->courses()->detach();
+        Session::flash('success','Successfully deleted assigned courses');
+        return redirect()->route('course.assignments');
     }
 }

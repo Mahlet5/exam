@@ -20,6 +20,7 @@
         <tr>
           <th>Teacher</th>
           <th>Course</th>
+          <th>Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -27,20 +28,19 @@
             <tr>
               <td>{{ $teacher->name }}</td>
               <td>
-              @foreach($teacher->courses as $course)
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-info">{{ $course->title }}</button>
-                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                      <span class="caret"></span>
-                      <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Delete</a></li>
-                      <li><a href="#">{{ $course->description}}</a></li>
-                    </ul>
-                  </div>
-
-              @endforeach
+                @foreach($teacher->courses as $course)
+                    <button type="button" class="btn btn-block btn-info">{{ $course->title }}</button>
+                @endforeach
+                @if(count($teacher->courses)==0)
+                    No assignd courses.
+                @endif
+              </td>
+              <td>
+                @if(count($teacher->courses)!=0)
+                  <a href="{{ route('assignment.delete',['id'=>$teacher->id]) }}" class="btn btn-xs btn-danger">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                  </a>
+                @endif
               </td>
             </tr>
           @endforeach
