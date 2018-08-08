@@ -14,10 +14,10 @@ class CourseUserTable extends Migration
     public function up()
     {
         Schema::create('course_user', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('course_id');
-            $table->string('user_id');
-            $table->timestamps();
+            $table->integer('course_id');
+            $table->foreign('course_id')->references('id')->on('courses');
+            $table->integer('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

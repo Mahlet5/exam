@@ -23,13 +23,26 @@
         </tr>
         </thead>
         <tbody>
-          @foreach ($courses as $course)
-              @foreach ($course->users() as $user)
-                  <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $course->title }}</td>
-                  </tr>
+          @foreach ($teachers as $teacher)
+            <tr>
+              <td>{{ $teacher->name }}</td>
+              <td>
+              @foreach($teacher->courses as $course)
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-info">{{ $course->title }}</button>
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                      <span class="caret"></span>
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Delete</a></li>
+                      <li><a href="#">{{ $course->description}}</a></li>
+                    </ul>
+                  </div>
+
               @endforeach
+              </td>
+            </tr>
           @endforeach
         </tbody>
       </table>
@@ -68,7 +81,7 @@
             <select class="form-control select2" multiple="multiple" id="course[]" name="course[]" data-placeholder="Select courses"
                     style="width: 100%;">
                     @foreach ($courses as $course)
-                      <option value="{{ $course->cno }}">{{ $course->title }} - {{ $course->cno }}</option>
+                      <option value="{{ $course->id }}">{{ $course->title }} - {{ $course->cno }}</option>
                     @endforeach
             </select>
           </div>
