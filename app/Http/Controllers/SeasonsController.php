@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Season;
+use App\Course;
+use Auth;
+use Session;
 
 class SeasonsController extends Controller
 {
@@ -11,9 +16,11 @@ class SeasonsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $course = Course::find($id);
+        $seasons = Season::where('course_id',$id)->where('user_id',Auth::user()->id)->get();
+        return view('admin.lookups.course.season')->with(['seasons'=>$seasons,'course'=> $course]);
     }
 
     /**

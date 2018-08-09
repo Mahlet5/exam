@@ -110,6 +110,11 @@ Route::group(['prefix'=>'student','middleware'=>['auth','student']],function(){
  */
 Route::group(['prefix'=>'teacher','middleware'=>['auth','teacher']],function(){
 
+      Route::get('/course/seasons/{id}',[
+        'uses'=>'SeasonsController@index',
+        'as'=>'course.seasons'
+      ]);
+
 });
 
 Route::get('/profile',[
