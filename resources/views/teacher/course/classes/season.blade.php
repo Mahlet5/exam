@@ -19,6 +19,7 @@
         <tr>
           <th>Class</th>
           <th>Course</th>
+          <th>Students</th>
           <th>Delete</th>
         </tr>
         </thead>
@@ -27,6 +28,11 @@
             <tr>
               <td>{{ $season->title }}</td>
               <td>{{ $season->course->title }}</td>
+              <td>
+                <a href="{{ route('class.students',['id'=>$season->id,'course'=>$course->id]) }}" class="btn btn-xs btn-info">
+                                  students</span>
+                </a>
+              </td>
               <td>
                 <a href="{{ route('course.delete',['id'=>$season->id,'course'=>$course->id]) }}" class="btn btn-xs btn-danger">
                                   <span class="glyphicon glyphicon-trash"></span>

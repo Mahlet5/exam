@@ -3,24 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 use App\Season;
 use App\Course;
-use Auth;
 use Session;
+use Auth;
 
-class SeasonsController extends Controller
+class CourseStudentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index($id, $course)
     {
-        $course = Course::find($id);
-        $seasons = Season::where('course_id',$id)->where('user_id',Auth::user()->id)->get();
-        return view('teacher.course.classes.season')->with(['seasons'=>$seasons,'course'=> $course]);
+        $season = Season::find($id);
+        $crs = Course::find($course);
+        return view('teacher.course.students.index')->with(['season'=>$season,'course'=>$crs]);
     }
 
     /**
@@ -41,20 +40,7 @@ class SeasonsController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->title);
-        $this->validate($request,[
-            'title'=>'required'
-        ]);
-
-        $class = new Season;
-        $class->title = $request->title;
-        $class->user_id = Auth::user()->id;
-        $class->course_id = $request->course;
-        $class->save();
-        Session::flash('success','Successfully created class');
-
-        $crs = Course::find($request->course);
-        return redirect()->route('course.seasons',['id'=>$request->course,'course'=>$crs]);
+        //
     }
 
     /**
@@ -97,13 +83,8 @@ class SeasonsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id,$course)
+    public function destroy($id)
     {
-        $season = Season::find($id);
-        $season->delete();
-        Session::flash('success','Successfully deleted class information.');
-        $crs = Course::find($course);
-        $seasons = Season::where('course_id',$course)->where('user_id',Auth::user()->id)->get();
-        return view('teacher.course.classes.season')->with(['seasons'=>$seasons,'course'=> $crs]);
+        //
     }
 }

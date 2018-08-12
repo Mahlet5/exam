@@ -130,6 +130,11 @@ Route::group(['prefix'=>'teacher','middleware'=>['auth','teacher']],function(){
         'as'=>'course.delete'
       ]);
 
+      Route::get('/class/students/{id}/{course}',[
+        'uses'=>'CourseStudentController@index',
+        'as'=>'class.students'
+      ]);
+
 });
 
 Route::get('/profile',[
