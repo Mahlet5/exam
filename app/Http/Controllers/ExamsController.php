@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Setting;
-use Session;
-use Auth;
 
-
-class SettingsController extends Controller
+class ExamsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +13,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        return view('admin.settings.settings')->with('settings', Setting::first());
+        return view('teacher.exams.index');
     }
 
     /**
@@ -38,7 +34,7 @@ class SettingsController extends Controller
      */
     public function store(Request $request)
     {
-        // return redirect()->route('course.seasons',['id'=>$request->course]);
+        //
     }
 
     /**
@@ -70,34 +66,9 @@ class SettingsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-      $this->validate($request,[
-        'site_name'=>'required',
-        'contact_number'=>'required',
-        'contact_email'=>'required|email',
-        'address'=>'required',
-        'about'=>'required',
-      ]);
-
-      $setting  = Setting::first();
-      if($request->hasFile('logo')){
-          $logo = $request->logo;
-          $logo_new = time().$logo->getClientOriginalName();
-          $logo->move('uploads/company',$logo_new);
-          $setting->logo = 'uploads/company/'.$logo_new;
-          $setting->save();
-      }
-
-      $setting->site_name = $request->site_name;
-      $setting->contact_number = $request->contact_number;
-      $setting->contact_email = $request->contact_email;
-      $setting->address = $request->address;
-      $setting->about = $request->about;
-
-      $setting->save();
-      Session::flash('success','Site settings updated successfully.');
-      return redirect()->back();
+        //
     }
 
     /**

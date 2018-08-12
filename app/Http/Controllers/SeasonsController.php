@@ -41,7 +41,20 @@ class SeasonsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->title);
+        $this->validate($request,[
+            'title'=>'required'
+        ]);
+
+        $class = new Season;
+        $class->title = $request->title;
+        $class->user_id = Auth::user()->id;
+        $class->course_id = $request->course;
+        $class->save();
+        Session::flash('success','Successfully created class');
+
+        $crs = Course::find($request->course);
+        return redirect()->route('course.seasons',['id'=>$request->course,'course'=>$crs]);
     }
 
     /**
@@ -84,8 +97,13 @@ class SeasonsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,$course)
     {
-        //
-    }
+        $season = Season::find($id);
+        $season->delete();
+        Session::flash('success','Successfully deleted class information.');
+        $crs = Course::find($course);
+        $seasons = Season::where('course_id',$course)->where('user_id',Auth::user()->id)->get();
+        return view('admin.lookups.course.season')->with(['seasons'=>$seasons,'course'=> $crs]);
+    }    
 }

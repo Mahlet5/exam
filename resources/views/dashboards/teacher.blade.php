@@ -13,7 +13,7 @@
           <strong><i class="fa fa-book margin-r-5"></i>Manage</strong>
 
           <p>
-            <span class="label label-primary"><a href="{{ route('course.seasons',['id'=>$course->id]) }}" style="color:#fff;">Seasons</a></span>
+            <span class="label label-primary"><a href="{{ route('course.seasons',['id'=>$course->id]) }}" style="color:#fff;">Classes</a></span>
             <span class="label label-warning"><a href="#" style="color:#fff;">Students</a></span>
             <span class="label label-info"><a href="#" style="color:#fff;">Materials</a></span>
             <span class="label label-success"><a href="#" style="color:#fff;">Assignments</a></span>

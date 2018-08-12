@@ -97,7 +97,7 @@ use App\Role;
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ route('users') }}"><i class="fa fa-circle-o"></i> Exams </a></li>
+            <li><a href="{{ route('exams') }}"><i class="fa fa-circle-o"></i> Exams </a></li>
           </ul>
         </li>
         <li class="treeview">

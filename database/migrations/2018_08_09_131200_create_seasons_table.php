@@ -16,8 +16,8 @@ class CreateSeasonsTable extends Migration
         Schema::create('seasons', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->integer('course_id');
-            $table->integer('user_id');
+            $table->integer('course_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->foreign('course_id')->references('id')->on('courses');
             $table->foreign('user_id')->references('id')->on('users');
             $table->SoftDeletes();
