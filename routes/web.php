@@ -76,7 +76,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth','admin']],function(){
 
       Route::get('/course/delete/{id}',[
         'uses'=>'CourseController@destroy',
-        'as'=>'course.delete'
+        'as'=>'course.deletea'
       ]);
 
       Route::get('/course/assignments',[

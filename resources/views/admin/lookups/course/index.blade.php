@@ -30,7 +30,7 @@
               <td>{{ $course->cno }}</td>
               <td>{{ $course->description }}</td>
               <td>
-                <a href="{{ route('course.delete',['id'=>$course->id]) }}" class="btn btn-xs btn-danger">
+                <a href="{{ route('course.deletea',['id'=>$course->id]) }}" class="btn btn-xs btn-danger">
                                   <span class="glyphicon glyphicon-trash"></span>
                 </a>
               </td>
