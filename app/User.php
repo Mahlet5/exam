@@ -42,7 +42,8 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Course')->withPivot('course_id');
     }
 
-    public function seasons(){
-        return $this->hasMany('App\Season');
+    public function seasons()
+    {
+        return $this->belongsToMany('App\Season')->withPivot('season_id');
     }
 }

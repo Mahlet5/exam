@@ -6,19 +6,24 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use App\Season;
+use App\User;
+use App\Course;
 
 class IncludedInClass extends Notification
 {
     use Queueable;
+
+    protected $season;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Season $season)
     {
-        //
+        $this->season = $season;
     }
 
     /**
@@ -40,10 +45,13 @@ class IncludedInClass extends Notification
      */
     public function toMail($notifiable)
     {
+        $teacher = User::find($this->season->user_id);
+        $course = Course::find($this->season->course_id);
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->greeting('Hi There!')
+                    ->line('You have been added to '.$teacher->name.'\'s '.$course->title.' class , use the link below to view additional information.')
+                    ->action('Visit the website', url('/'))
+                    ->line('Thank you for using Exam!');
     }
 
     /**

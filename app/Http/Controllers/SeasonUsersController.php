@@ -5,21 +5,31 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Season;
 use App\Course;
-use Session;
+use App\SeasonUser;
+use App\User;
 use Auth;
+use Session;
+use Notification;
 
-class CourseStudentController extends Controller
+class SeasonUsersController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id, $course)
+    public function index($id,$course)
     {
         $season = Season::find($id);
+        //this is the course id
         $crs = Course::find($course);
-        return view('teacher.course.students.index')->with(['season'=>$season,'course'=>$crs]);
+        $students = SeasonUser::where('season_id',$id)->get();
+
+
+        //select the ones that are not already assigned to the class
+        $studs = User::where('role_id',2)->get();
+
+        return view('teacher.course.students.index')->with(['season'=>$season,'course'=>$crs,'students'=>$students, 'studs'=>$studs]);
     }
 
     /**
@@ -29,7 +39,7 @@ class CourseStudentController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -40,7 +50,18 @@ class CourseStudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $watchers = array();
+        $season = Season::find($request->season);
+        
+        $season->users()->attach($request->students);
+
+        $students = User::whereIn('id',$request->students)->get();
+
+        //send email Notification to included students
+        Notification::send($students, new \App\Notifications\IncludedInClass($season));
+
+        Session::flash('success','Successfully added students to class.');
+        return redirect()->route('class.students',['id'=>$season->id,'course'=>$season->course_id]);
     }
 
     /**
@@ -83,8 +104,15 @@ class CourseStudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($season,$student)
     {
-        //
+
+        $entry = SeasonUser::where('season_id',$season)->where('user_id',$student)->first();
+        $entry->delete();
+        Session::flash('success','Successfully removed student from class');
+
+        $ssn = Season::find($season);
+
+        return redirect()->route('class.students',['id'=>$season,'course'=>$ssn->course_id]);
     }
 }

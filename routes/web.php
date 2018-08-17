@@ -131,8 +131,18 @@ Route::group(['prefix'=>'teacher','middleware'=>['auth','teacher']],function(){
       ]);
 
       Route::get('/class/students/{id}/{course}',[
-        'uses'=>'CourseStudentController@index',
+        'uses'=>'SeasonUsersController@index',
         'as'=>'class.students'
+      ]);
+
+      Route::post('/class/course/student',[
+        'uses'=>'SeasonUsersController@store',
+        'as'=>'student.assign'
+      ]);
+
+      Route::get('/class/assignment/delete/{season}/{student}',[
+        'uses'=>'SeasonUsersController@destroy',
+        'as'=>'class.assignment.delete'
       ]);
 
 });
