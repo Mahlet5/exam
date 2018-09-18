@@ -19,4 +19,8 @@ class Season extends Model
     {
         return $this->belongsTo('App\Course');
     }
+
+    public function materials(){
+      return $this->hasMany('App\Material');
+    }
 }

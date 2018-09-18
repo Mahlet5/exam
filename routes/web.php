@@ -115,6 +115,11 @@ Route::group(['prefix'=>'teacher','middleware'=>['auth','teacher']],function(){
         'as'=>'course.seasons'
       ]);
 
+      Route::get('/course/materials/{id}',[
+        'uses'=>'MaterialsController@index',
+        'as'=>'course.materials'
+      ]);
+
       Route::get('/exams',[
         'uses'=>'ExamsController@index',
         'as'=>'exams'
@@ -123,6 +128,11 @@ Route::group(['prefix'=>'teacher','middleware'=>['auth','teacher']],function(){
       Route::post('/class/store',[
         'uses'=>'SeasonsController@store',
         'as'=>'class.store'
+      ]);
+
+      Route::post('/material/store',[
+        'uses'=>'MaterialsController@store',
+        'as'=>'material.store'
       ]);
 
       Route::get('/course/delete/{id}/{course}',[
