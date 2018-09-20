@@ -119,6 +119,10 @@ Route::group(['prefix'=>'teacher','middleware'=>['auth','teacher']],function(){
         'uses'=>'MaterialsController@index',
         'as'=>'course.materials'
       ]);
+      Route::get('/course/assignments/{id}',[
+        'uses'=>'AssignmentsController@index',
+        'as'=>'course.assignments'
+      ]);
 
       Route::get('/exams',[
         'uses'=>'ExamsController@index',

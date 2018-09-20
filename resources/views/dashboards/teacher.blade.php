@@ -16,7 +16,7 @@
             <span class="label label-primary"><a href="{{ route('course.seasons',['id'=>$course->id]) }}" style="color:#fff;">Classes</a></span>
             <span class="label label-warning"><a href="#" style="color:#fff;">Students</a></span>
             <span class="label label-info"><a href="{{ route('course.materials',['id'=>$course->id]) }}" style="color:#fff;">Materials</a></span>
-            <span class="label label-success"><a href="#" style="color:#fff;">Assignments</a></span>
+            <span class="label label-success"><a href="{{ route('course.assignments',['id'=>$course->id]) }}" style="color:#fff;">Assignments</a></span>
           </p>
 
           <hr>

@@ -23,4 +23,7 @@ class Season extends Model
     public function materials(){
       return $this->hasMany('App\Material');
     }
+    public function assignments(){
+        return $this->hasMany('App\Assignment');
+      }
 }
