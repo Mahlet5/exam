@@ -38,9 +38,9 @@
                 </a> --}}
               </td>
               <td>
-                {{-- <a href="{{ route('course.delete',['id'=>$season->id,'course'=>$course->id]) }}" class="btn btn-xs btn-danger">
+                <a href="{{ route('material.delete',['id'=>$material->id,'course'=>$course->id]) }}" class="btn btn-xs btn-danger">
                                   <span class="glyphicon glyphicon-trash"></span>
-                </a> --}}
+                </a> 
               </td>
             </tr>
           @endforeach

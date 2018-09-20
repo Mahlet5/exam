@@ -134,6 +134,10 @@ Route::group(['prefix'=>'teacher','middleware'=>['auth','teacher']],function(){
         'uses'=>'MaterialsController@store',
         'as'=>'material.store'
       ]);
+      Route::get('/material/delete/{id}/{course}',[
+         'uses'=>'MaterialsController@destroy',
+          'as'=>'material.delete'
+      ]);
 
       Route::get('/course/delete/{id}/{course}',[
         'uses'=>'SeasonsController@destroy',

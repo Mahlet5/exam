@@ -8,6 +8,7 @@ use App\Season;
 use App\Material;
 use Auth;
 use Session;
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 class MaterialsController extends Controller
 {
@@ -108,8 +109,18 @@ class MaterialsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,$course)
     {
-        //
+        $material = Material::find($id);
+        $material->delete();
+        Session::flash('success','Successfully deleted class materials.');
+        return redirect()->back();
+
+        //  $material = Material::find($id);
+        //  $material->delete();
+        //  Session::flash('success','Successfully deleted class materials.');
+        $crs = Course::find($course);
+        $materials = Material::where('course_id',$course)->where('user_id',Auth::user()->id)->get();
+        return view('teacher.course.material')->with(['materials'=>$materials,'course'=> $crs]);
     }
 }
