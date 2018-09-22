@@ -8,7 +8,7 @@
     <div class="col-md-6">
   <div class="box box-primary">
     <div class="box-header  with-border">
-      <h3 class="box-title">{{ $course->title }} Materials</h3>
+      <h3 class="box-title">{{ $course->title }} Assignmnets</h3>
      
     </div>
     <!-- /.box-header -->
@@ -18,8 +18,10 @@
         <tr>
           <th>Class</th>
           <th>Course</th>
+         
           <th>Description</th>
           <th>File</th>
+          <th>Due_date</th>
           <th>Delete</th>
         </tr>
         </thead>
@@ -34,10 +36,11 @@
                
               </td>
               <td>
-                <a href="" class="btn btn-xs btn-danger">
+                <a href="{{ route('assignmnet.delete',['id'=>$assignment->id,'course'=>$course->id]) }}" class="btn btn-xs btn-danger">
                                   <span class="glyphicon glyphicon-trash"></span>
                 </a> 
               </td>
+              
             </tr>
           @endforeach
         </tbody>
@@ -55,7 +58,9 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
+   
+      <form class="form-horizontal" method="POST" action="{{ route('assignment.store') }}" enctype="multipart/form-data">
+
         {{ csrf_field() }}
         <div class="form-group">
           <label for="mclass" class="col-sm-2 control-label">Class</label>
@@ -75,12 +80,21 @@
             <input type="file" name="document" id="document">
           </div>
         </div>
+
+
         <div class="form-group">
           <label for="desciption" class="col-sm-2 control-label">Description</label>
 
           <div class="col-sm-10">
             <textarea class="form-control" name="description" id="description"></textarea>
           </div>
+          <div class="form-group">
+        <label for="Due_date" class="col-sm-2 control-label">Due date</label>
+        <div class="col-sm-10">
+        <form action="/action_page.php">
+        <input type="date" name="Due_date" id="Due_date">
+        </div>
+       </div>
         </div>
         <div class="box-footer">
           {{-- <button type="submit" class="btn btn-default">Cancel</button> --}}

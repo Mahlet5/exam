@@ -17,11 +17,13 @@ class CreateAssignmentsTable extends Migration
             $table->increments('id');
             $table->integer('season_id')->unsigned();
             $table->foreign('season_id')->references('id')->on('seasons');
-            $table->string('title');
+            
             $table->text('description');
             $table->text('path');
             $table->date('due_date');
+            $table->SoftDeletes();
             $table->timestamps();
+            
         });
     }
 

@@ -121,7 +121,7 @@ Route::group(['prefix'=>'teacher','middleware'=>['auth','teacher']],function(){
       ]);
       Route::get('/course/assignments/{id}',[
         'uses'=>'AssignmentsController@index',
-        'as'=>'course.assignments'
+        'as'=>'course.assignment'
       ]);
 
       Route::get('/exams',[
@@ -138,10 +138,18 @@ Route::group(['prefix'=>'teacher','middleware'=>['auth','teacher']],function(){
         'uses'=>'MaterialsController@store',
         'as'=>'material.store'
       ]);
+      Route::post('/assignment/store',[
+        'uses'=>'AssignmentsController@store',
+        'as'=>'assignment.store'
+      ]);
       Route::get('/material/delete/{id}/{course}',[
          'uses'=>'MaterialsController@destroy',
           'as'=>'material.delete'
       ]);
+      Route::get('/assignment/delete/{id}/{course}',[
+        'uses'=>'AssignmentsController@destroy',
+         'as'=>'assignmnet.delete'
+     ]);
 
       Route::get('/course/delete/{id}/{course}',[
         'uses'=>'SeasonsController@destroy',

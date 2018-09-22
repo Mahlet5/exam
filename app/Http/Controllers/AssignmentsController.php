@@ -22,7 +22,7 @@ class AssignmentsController extends Controller
         $course = Course::find($id);
         $seasons = Season::where('course_id',$id)->where('user_id',Auth::user()->id)->get();
         $assignments = Assignment::all();
-        return view('teacher.course.assignments.index')->with(['seasons'=>$seasons,'course'=> $course, 'assignments' => $assignments]);
+        return view('teacher.course.assignment.index')->with(['seasons'=>$seasons,'course'=> $course, 'assignments' => $assignments]);
     }
 
     /**
@@ -43,7 +43,56 @@ class AssignmentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'mclass'=>'required',
+            
+            'description'=>'required',
+            'document'=>'required'
+
+        ]);
+
+        //take care of the featured image first
+        $featured = $request->document;
+        //give a new name to this image
+        //because the user can upload a new file with the same namespace
+        $featured_new_name = time().$featured->getClientOriginalName();
+        //move this file to our application
+        //we will upload this file to a new directory we just created under
+        //public, which is called uploads and under avatars
+        $featured->move('uploads/assignments',$featured_new_name);
+
+        $assignment = new Assignment;
+ 
+        $assignment->season_id = $request->mclass;
+        $assignment->description = $request->description;
+        $assignment->path = 'uploads/assignments/' . $featured_new_name;
+
+        $assignment->save();
+        Session::flash('success','Assignmnet shared successfully.');
+        return redirect()->back();
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     /**
@@ -86,8 +135,16 @@ class AssignmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,$course)
     {
-        //
+        $assignment = Assignment::find($id);
+        $assignment->delete();
+        Session::flash('success','Successfully deleted class assignments.');
+        return redirect()->back();
+
+        
+        $crs = Course::find($course);
+        $assignments = Assignment::where('course_id',$course)->where('user_id',Auth::user()->id)->get();
+        return view('teacher.course.assignmnet')->with(['assignmnets'=>$assignmnets,'course'=> $crs]);
     }
 }

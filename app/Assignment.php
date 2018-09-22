@@ -12,4 +12,5 @@ class Assignment extends Model
     public function season() {
       return $this->belongsTo('App\Season');
     }
+   
 }
