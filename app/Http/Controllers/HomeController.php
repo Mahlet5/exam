@@ -43,7 +43,7 @@ class HomeController extends Controller
             $q->where('user_id',Auth::user()->id);
           })->get();
 
-          return view('home')->with(['seasons'=>$seasons]);
+          return view('home')->with(['seasons'=>$seasons,]);
         }
         return view('home');
     }

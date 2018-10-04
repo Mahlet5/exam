@@ -82,7 +82,7 @@ use App\Role;
           <ul class="treeview-menu">
             <li><a href="{{ route('users') }}"><i class="fa fa-circle-o"></i> Assignments</a></li>
             <li><a href="{{ route('roles') }}"><i class="fa fa-circle-o"></i> Courses</a></li>
-            <li><a href="{{ route('site.settings') }}"><i class="fa fa-circle-o"></i> Feedbacks</a></li>
+            <!-- <li><a href="{{ route('site.settings') }}"><i class="fa fa-circle-o"></i> Feedbacks</a></li> -->
           </ul>
         </li>
 
