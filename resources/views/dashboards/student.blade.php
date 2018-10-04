@@ -5,7 +5,7 @@
     <div class="col-md-3">
       <div class="box box-primary">
         <div class="box-header with-border" style="background-color:#697d9e;color:#fff;">
-          <h3 class="box-title">{{ $season->title }}</h3>
+          <h3 class="box-title">{{ $season->title }} Classes</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
