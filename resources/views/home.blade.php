@@ -9,7 +9,7 @@ use App\Role;
 @if(Auth::user()->role_id==1)
   @include('dashboards.admin');
 @elseif(Auth::user()->role_id==2)
-  @include('dashboards.student');
+  @include('dashboards.student',['seasons'=>$seasons]);
 @elseif(Auth::user()->role_id==3)
   @include('dashboards.teacher',['courses'=>$courses]);
 @endif
